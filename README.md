@@ -19,3 +19,7 @@
 - Unzip the folder.
 - Open NikoFarm.exe.
     
+## Controls:
+- WASD for movement
+- Left click to use a item
+- Scroll wheel to change item in inventory
