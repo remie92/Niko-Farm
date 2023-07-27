@@ -55,19 +55,22 @@ class nikoController {
 
   void tick() {
     if (moving==false) {
-      if (upPressed) {
+
+      int offsetX=int(width/2)/int(24*spriteScale)-1;
+      int offsetY=int(height/2)/int(24*spriteScale);
+      if (upPressed&&isSolid(world[nikoX+offsetX][nikoY+offsetY-1])==false) {
         moving=true;
         direction=0;
       }
-      if (rightPressed) {
+      if (rightPressed&&isSolid(world[nikoX+offsetX+1][nikoY+offsetY])==false) {
         moving=true;
         direction=1;
       }
-      if (downPressed) {
+      if (downPressed&&isSolid(world[nikoX+offsetX][nikoY+offsetY+1])==false) {
         moving=true;
         direction=2;
       }
-      if (leftPressed) {
+      if (leftPressed&&isSolid(world[nikoX+offsetX-1][nikoY+offsetY])==false) {
         moving=true;
         direction=3;
       }
@@ -105,21 +108,22 @@ class nikoController {
         inbetween=0;
         inbetweenX=0;
         inbetweenY=0;
-        if (upPressed) {
+        int offsetX=int(width/2)/int(24*spriteScale)-1;
+        int offsetY=int(height/2)/int(24*spriteScale);
+        if (upPressed&&isSolid(world[nikoX+offsetX][nikoY+offsetY-1])==false) {
           moving=true;
           direction=0;
         }
-        if (rightPressed) {
+        if (rightPressed&&isSolid(world[nikoX+offsetX+1][nikoY+offsetY])==false) {
           moving=true;
           direction=1;
         }
-        if (downPressed) {
+        if (downPressed&&isSolid(world[nikoX+offsetX][nikoY+offsetY+1])==false) {
           moving=true;
           direction=2;
         }
-        if (leftPressed) {
+        if (leftPressed&&isSolid(world[nikoX+offsetX-1][nikoY+offsetY])==false) {
           moving=true;
-          direction=3;
         }
       }
     }

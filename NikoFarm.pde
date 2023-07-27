@@ -10,7 +10,7 @@ boolean rightPressed = false;
 
 int[][] world=new int[100][100];
 PImage tileSheet;
-int tileAmount=7;
+int tileAmount=9;
 PImage[] tileImages=new PImage[tileAmount];
 
 PImage[] itemImages;
@@ -22,13 +22,13 @@ int selectedItem=0;
 nikoController nikoController=new nikoController();
 void setup() {
   loadData();
-
   fullScreen();
+  noSmooth();
   spriteScale=height/216.0;
   inventory = new IntDict();
   addInventory(5, "Seeds");
-   addInventory(1, "Hoe");
-  noSmooth();
+  addInventory(1, "Hoe");
+  smallHouse(3, 8);
   //for (int i=2; i<10; i++) {        //adds random dirt
   //  for (int j=2; j<10; j++) {
   //    if (random(1)>0.2) {
@@ -39,6 +39,9 @@ void setup() {
 }
 
 void draw() {
+  int offsetX=int(width/2)/int(24*spriteScale)-1;
+  int offsetY=int(height/2)/int(24*spriteScale);
+  println((nikoX+offsetX)+"  "+(nikoY+offsetY));
   //  println(inventory);
   background(128, 128, 255);
   drawMap();

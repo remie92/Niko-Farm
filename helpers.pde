@@ -11,6 +11,21 @@ void loadData() {
   }
 }
 
+
+boolean isSolid(int type) {
+  int[] solid={
+    7, 
+    8
+  };
+
+  for (int i=0; i<solid.length; i++) {
+    if (type==solid[i]) {
+      return true;
+    }
+  }
+  return false;
+}
+
 void addInventory(int amount, String name) {
   if (inventory.hasKey(name)) {
     inventory.set(name, inventory.get(name)+amount);
@@ -26,11 +41,11 @@ void addInventory(int amount, String name) {
 void mouseWheel(MouseEvent event) {
   int dir = event.getCount();
   selectedItem+=dir;
-  if(selectedItem<0){
-  selectedItem=0;
+  if (selectedItem<0) {
+    selectedItem=0;
   }
-  if(selectedItem>=inventory.size()){
-  selectedItem=inventory.size()-1;
+  if (selectedItem>=inventory.size()) {
+    selectedItem=inventory.size()-1;
   }
 }
 
@@ -52,10 +67,10 @@ void drawInventory() {
     noStroke();
     rect(spriteScale*5, i*spriteScale*14+(spriteScale*2), spriteScale*12, spriteScale*12);
     image(itemImages[getIndex(keys[i], itemNames)], spriteScale*5, i*spriteScale*14+(spriteScale*2), spriteScale*12, spriteScale*12);
-    if(i==selectedItem){
-    fill(0,255,0);
-    } else{
-    fill(255,0,0);
+    if (i==selectedItem) {
+      fill(0, 255, 0);
+    } else {
+      fill(255, 0, 0);
     }
     noStroke();
     rect(spriteScale*1, i*spriteScale*14+(spriteScale*2), spriteScale*3, spriteScale*12);
