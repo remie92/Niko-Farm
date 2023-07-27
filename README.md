@@ -10,6 +10,7 @@
 - 100x100 world (Could be bigger)
 - Fullscreen
 - Grow wheat on a farm!
+- -There is a house!
 
 
 ## Installation
