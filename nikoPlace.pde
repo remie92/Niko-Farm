@@ -44,3 +44,12 @@ void usingHoe(String name, int tileX, int tileY) {
     break;
   }
 }
+
+void usingWheat(String name, int tileX, int tileY) {
+  switch(world[tileX][tileY]) {
+  case 10:
+    removeInventory(1, "Wheat");
+    addInventory(1, "Flour");
+    break;
+  }
+}

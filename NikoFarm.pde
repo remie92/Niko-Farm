@@ -7,10 +7,11 @@ boolean upPressed = false;
 boolean downPressed = false;
 boolean leftPressed = false;
 boolean rightPressed = false;
+boolean shiftPressed=false;
 
 int[][] world=new int[100][100];
 PImage tileSheet;
-int tileAmount=9;
+int tileAmount=11;
 PImage[] tileImages=new PImage[tileAmount];
 
 PImage[] itemImages;
@@ -24,11 +25,12 @@ void setup() {
   loadData();
   fullScreen();
   noSmooth();
-  spriteScale=height/216.0;
+//  spriteScale=height/216.0;
   inventory = new IntDict();
   addInventory(5, "Seeds");
   addInventory(1, "Hoe");
   smallHouse(3, 8);
+  windmill(15,8);
   //for (int i=2; i<10; i++) {        //adds random dirt
   //  for (int j=2; j<10; j++) {
   //    if (random(1)>0.2) {
@@ -155,6 +157,8 @@ void keyPressed() {
     leftPressed = true;
   } else if (key == 'd') {
     rightPressed = true;
+  }else if (keyCode==SHIFT) {
+    shiftPressed = true;
   }
 }
 
@@ -167,5 +171,7 @@ void keyReleased() {
     leftPressed = false;
   } else if (key == 'd') {
     rightPressed = false;
+  }else if (keyCode==SHIFT) {
+    shiftPressed = false;
   }
 }

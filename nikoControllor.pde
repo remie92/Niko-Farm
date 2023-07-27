@@ -46,6 +46,9 @@ class nikoController {
         case "Hoe":
           usingHoe(inventory.keyArray()[selectedItem], tileX, tileY);
           break;
+        case "Wheat":
+          usingWheat(inventory.keyArray()[selectedItem], tileX, tileY);
+          break;
         }
       }
       catch(Exception e) {
@@ -103,7 +106,7 @@ class nikoController {
         }
         break;
       }
-      if (inbetween==24) {
+      if (inbetween>=24) {
         moving=false;
         inbetween=0;
         inbetweenX=0;
@@ -124,6 +127,7 @@ class nikoController {
         }
         if (leftPressed&&isSolid(world[nikoX+offsetX-1][nikoY+offsetY])==false) {
           moving=true;
+          direction=3;
         }
       }
     }

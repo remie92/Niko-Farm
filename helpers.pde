@@ -15,7 +15,9 @@ void loadData() {
 boolean isSolid(int type) {
   int[] solid={
     7, 
-    8
+    8,
+    9,
+    10
   };
 
   for (int i=0; i<solid.length; i++) {
