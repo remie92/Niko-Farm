@@ -10,6 +10,7 @@
 - 100x100 world (Could be bigger)
 - Fullscreen
 - Grow wheat on a farm!
+- There is a house!
 
 
 ## Installation
@@ -18,3 +19,7 @@
 - Unzip the folder.
 - Open NikoFarm.exe.
     
+## Controls:
+- WASD for movement
+- Left click to use a item
+- Scroll wheel to change item in inventory
