@@ -41,6 +41,18 @@ void windmill(int x, int y) {
 }
 
 
+void well(int x,int y){
+int[][] structure={
+{8,8,8,8,8},
+{-1,8,-1,8,-1},
+{-1,8,12,8,-1},
+{-1,7,7,7,-1}
+};
+
+place(structure,x,y);
+}
+
+
 void place(int[][] struc, int x, int y) {
 
   for (int i=0; i<struc.length; i++) {

@@ -1,11 +1,22 @@
-int nikoX=2;
-int nikoY=5;
+int nikoX=0;
+int nikoY=0;
 
 int tileSize=24;
 
 
 void mouseReleased() {
-  nikoController.click();
+  if (gameState==0) {
+    if (mouseIn(int(width*0.65), int(height*0.28), int(width*0.22), int(spriteScale*16))) {
+      newGame();
+    }
+    if (mouseIn(int(width*0.65), int(height*0.43), int(width*0.32), int(spriteScale*16))) {
+      loadGame();
+    }
+  }
+  if (gameState==1) {
+    nikoController.click();
+    saveGame();
+  }
 }
 
 int[] screenToTile() {
@@ -23,13 +34,13 @@ class nikoController {
   int inbetweenY=0;
   int inbetween=0;
   boolean moving=false;
-  int direction=0;
+  int direction=2;
   nikoController() {
   }
 
 
   void click() {
-    if (mouseButton==LEFT) {
+    if (mouseButton==LEFT&&dist(width/2, height/2, mouseX, mouseY)<spriteScale*100) {
       int totalX=nikoX*24+nikoController.inbetweenX;
       int totalY=nikoY*24+nikoController.inbetweenY;
       try {
@@ -48,6 +59,12 @@ class nikoController {
           break;
         case "Wheat":
           usingWheat(inventory.keyArray()[selectedItem], tileX, tileY);
+          break;
+        case "Bucket":
+          usingBucket(inventory.keyArray()[selectedItem], tileX, tileY);
+          break;
+        case "Water Bucket":
+          usingWaterBucket(inventory.keyArray()[selectedItem], tileX, tileY);
           break;
         }
       }
@@ -135,52 +152,64 @@ class nikoController {
 
   void draw() {
     if (moving==false) {
-      drawNiko(1, 6);
+      //drawNiko(0,0);
+      if (direction==0) {
+        drawNiko(0, 3);
+      }
+      if (direction==1) {
+        drawNiko(0, 2);
+      }
+      if (direction==2) {
+        drawNiko(0, 0);
+      }
+      if (direction==3) {
+        drawNiko(0, 1);
+      }
     }
     if (moving) {
       switch(direction) {
       case 0:
         if (inbetween<8) {
-          drawNiko(0, 4);
+          drawNiko(1, 3);
         }
         if (inbetween>=8&&inbetween<16) {
-          drawNiko(1, 4);
+          drawNiko(2, 3);
         }
         if (inbetween>=16) {
-          drawNiko(2, 4);
+          drawNiko(3, 3);
         }
         break;
       case 1:
         if (inbetween<8) {
-          drawNiko(0, 5);
+          drawNiko(1, 2);
         }
         if (inbetween>=8&&inbetween<16) {
-          drawNiko(1, 5);
+          drawNiko(2, 2);
         }
         if (inbetween>=16) {
-          drawNiko(2, 5);
+          drawNiko(3, 2);
         }
         break;
       case 2:
         if (inbetween<8) {
-          drawNiko(0, 6);
+          drawNiko(1, 0);
         }
         if (inbetween>=8&&inbetween<16) {
-          drawNiko(1, 6);
+          drawNiko(2, 0);
         }
         if (inbetween>=16) {
-          drawNiko(2, 6);
+          drawNiko(3, 0);
         }
         break;
       case 3:
         if (inbetween<8) {
-          drawNiko(0, 7);
+          drawNiko(1, 1);
         }
         if (inbetween>=8&&inbetween<16) {
-          drawNiko(1, 7);
+          drawNiko(2, 1);
         }
         if (inbetween>=16) {
-          drawNiko(2, 7);
+          drawNiko(3, 1);
         }
         break;
       }

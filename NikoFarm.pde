@@ -11,14 +11,20 @@ boolean shiftPressed=false;
 
 int[][] world=new int[100][100];
 PImage tileSheet;
-int tileAmount=11;
+int tileAmount=13;
 PImage[] tileImages=new PImage[tileAmount];
 
 PImage[] itemImages;
 String[] itemNames;
 IntDict inventory;
 
+PImage titleBackground;
+PImage titleNiko;
+
 int selectedItem=0;
+
+int gameState=0;
+
 
 nikoController nikoController=new nikoController();
 void setup() {
@@ -26,11 +32,7 @@ void setup() {
   fullScreen();
   noSmooth();
 //  spriteScale=height/216.0;
-  inventory = new IntDict();
-  addInventory(5, "Seeds");
-  addInventory(1, "Hoe");
-  smallHouse(3, 8);
-  windmill(15,8);
+
   //for (int i=2; i<10; i++) {        //adds random dirt
   //  for (int j=2; j<10; j++) {
   //    if (random(1)>0.2) {
@@ -41,10 +43,22 @@ void setup() {
 }
 
 void draw() {
-  int offsetX=int(width/2)/int(24*spriteScale)-1;
-  int offsetY=int(height/2)/int(24*spriteScale);
-  println((nikoX+offsetX)+"  "+(nikoY+offsetY));
-  //  println(inventory);
+  if(gameState==0){
+  image(titleBackground,0,0,width,height);
+  fill(0,0,0,100);
+  noStroke();
+ // rect(int(width*0.65),int(height*0.28),int(width*0.22),int(spriteScale*16));
+//  rect(int(width*0.65),int(height*0.43),int(width*0.32),int(spriteScale*16));
+  textSize(spriteScale*16);
+  fill(#FAE332);
+  text("New Game",width*0.65,height*0.35);
+  text("Load Last Game",width*0.65,height*0.5);
+ // image(titleNiko,width*0.7,height*0.3,width*0.2,height*0.4);
+  }
+  if(gameState==1){
+    if(frameCount%(60*10)==0){
+    saveGame();
+    }
   background(128, 128, 255);
   drawMap();
   nikoController.tick();
@@ -56,6 +70,7 @@ void draw() {
   }
   if (selectedItem>=inventory.size()) {
     selectedItem=inventory.size()-1;
+  }
   }
 }
 

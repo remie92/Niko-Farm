@@ -39,8 +39,36 @@ void usingHoe(String name, int tileX, int tileY) {
 
   case 6:
     addInventory(1, "Wheat");
-    addInventory(2, "Seeds");
+    addInventory(int(random(1, 4)), "Seeds");
     world[tileX][tileY]=1;
+    break;
+  }
+}
+
+void usingBucket(String name, int tileX, int tileY) {
+  switch(world[tileX][tileY]) {
+  case 12:
+    removeInventory(1, "Bucket");
+    addInventory(1, "Water Bucket");
+    break;
+    case 11:
+        removeInventory(1, "Bucket");
+    addInventory(1, "Water Bucket");
+    world[tileX][tileY]=1;
+    break;
+  }
+}
+void usingWaterBucket(String name, int tileX, int tileY) {
+  switch(world[tileX][tileY]) {
+  case 12:
+    removeInventory(1, "Water Bucket");
+    addInventory(1, "Bucket");
+    break;
+    case 0:
+    removeInventory(1, "Water Bucket");
+    addInventory(1, "Bucket");
+    
+    world[tileX][tileY]=11;
     break;
   }
 }

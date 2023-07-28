@@ -1,4 +1,11 @@
+boolean mouseIn(float x,float y,float sx,float sy){
+return mouseX>x&&mouseY>y&&mouseX<x+sx&&mouseY<y+sy;
+}
+
 void loadData() {
+  
+  titleNiko=loadImage("data/title/niko title.png");
+  titleBackground=loadImage("data/title/titlebackground.png");
   itemNames=loadStrings("data/items/itemlist.txt");
   itemImages=new PImage[itemNames.length];
   for (int i=0; i<itemNames.length; i++) {
@@ -17,7 +24,9 @@ boolean isSolid(int type) {
     7, 
     8,
     9,
-    10
+    10,
+    11,
+    12
   };
 
   for (int i=0; i<solid.length; i++) {

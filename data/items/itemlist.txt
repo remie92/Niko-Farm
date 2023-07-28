@@ -3,3 +3,5 @@ Seeds
 Grass
 Hoe
 Flour
+Bucket
+Water Bucket
