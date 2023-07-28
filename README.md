@@ -10,7 +10,8 @@
 - 100x100 world (Could be bigger)
 - Fullscreen
 - Grow wheat on a farm!
-- There is a house!
+- There are 3 structures!
+- Autosaving!
 
 
 ## Installation
@@ -23,3 +24,4 @@
 - WASD for movement
 - Left click to use a item
 - Scroll wheel to change item in inventory
+- ESC to quit
