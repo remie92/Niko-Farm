@@ -4,7 +4,7 @@
 
 
 
-## Features
+## Features:
 
 - Inventory system.
 - 100x100 world (Could be bigger)
@@ -14,7 +14,7 @@
 - Autosaving!
 
 
-## Installation
+## Installation:
 
 - Download the latest .zip from the releases tab.
 - Unzip the folder.
@@ -25,3 +25,7 @@
 - Left click to use a item
 - Scroll wheel to change item in inventory
 - ESC to quit
+
+
+## Credits:
+- Wheat Texures made by u/LegionCobra on Reddit.
