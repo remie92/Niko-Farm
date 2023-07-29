@@ -9,6 +9,10 @@ void newGame() {
   windmill(15, 8);
 
   well(25, 8);
+
+
+
+
 }
 
 

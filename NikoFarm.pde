@@ -11,7 +11,7 @@ boolean shiftPressed=false;
 
 int[][] world=new int[100][100];
 PImage tileSheet;
-int tileAmount=13;
+int tileAmount=15;
 PImage[] tileImages=new PImage[tileAmount];
 
 PImage[] itemImages;
@@ -25,13 +25,23 @@ int selectedItem=0;
 
 int gameState=0;
 
+final int grassId=0;
+final int farmId=1;
+final int lastWheatId=8;
+final int brickId=9;
+final int woodId=10;
+final int windId=11;
+final int crusherId=12;
+final int waterId=13;
+final int wellId=14;
+
 
 nikoController nikoController=new nikoController();
 void setup() {
   loadData();
   fullScreen();
   noSmooth();
-//  spriteScale=height/216.0;
+  //  spriteScale=height/216.0;
 
   //for (int i=2; i<10; i++) {        //adds random dirt
   //  for (int j=2; j<10; j++) {
@@ -43,40 +53,40 @@ void setup() {
 }
 
 void draw() {
-  if(gameState==0){
-  image(titleBackground,0,0,width,height);
-  fill(0,0,0,100);
-  noStroke();
- // rect(int(width*0.65),int(height*0.28),int(width*0.22),int(spriteScale*16));
-//  rect(int(width*0.65),int(height*0.43),int(width*0.32),int(spriteScale*16));
-  textSize(spriteScale*16);
-  fill(#FAE332);
-  text("New Game",width*0.65,height*0.35);
-  text("Load Last Game",width*0.65,height*0.5);
- // image(titleNiko,width*0.7,height*0.3,width*0.2,height*0.4);
+  if (gameState==0) {
+    image(titleBackground, 0, 0, width, height);
+    fill(0, 0, 0, 100);
+    noStroke();
+    // rect(int(width*0.65),int(height*0.28),int(width*0.22),int(spriteScale*16));
+    //  rect(int(width*0.65),int(height*0.43),int(width*0.32),int(spriteScale*16));
+    textSize(spriteScale*16);
+    fill(#FAE332);
+    text("New Game", width*0.65, height*0.35);
+    text("Load Last Game", width*0.65, height*0.5);
+    // image(titleNiko,width*0.7,height*0.3,width*0.2,height*0.4);
   }
-  if(gameState==1){
-    if(frameCount%(60*10)==0){
-    saveGame();
+  if (gameState==1) {
+    if (frameCount%(60*10)==0) {
+      saveGame();
     }
-  background(128, 128, 255);
-  drawMap();
-  nikoController.tick();
-  nikoController.draw();
-  worldTick();
-  drawInventory();
-  if (selectedItem<0) {
-    selectedItem=0;
-  }
-  if (selectedItem>=inventory.size()) {
-    selectedItem=inventory.size()-1;
-  }
+    background(128, 128, 255);
+    drawMap();
+    nikoController.tick();
+    nikoController.draw();
+    worldTick();
+    drawInventory();
+    if (selectedItem<0) {
+      selectedItem=0;
+    }
+    if (selectedItem>=inventory.size()) {
+      selectedItem=inventory.size()-1;
+    }
   }
 }
 
 
 
-int randomTick=1000;    //blocks per ten thousand
+int randomTick=100;    //blocks per ten thousand
 float randomChance=0.1;
 
 void worldTick() {
@@ -98,6 +108,12 @@ void worldTick() {
         break;
       case 5:
         world[tileX][tileY]=6;
+        break;
+      case 6:
+        world[tileX][tileY]=7;
+        break;
+      case 7:
+        world[tileX][tileY]=8;
         break;
       }
     }
@@ -164,6 +180,8 @@ boolean rectanglesIntersect(float x1, float y1, float width1, float height1, flo
 
 
 void keyPressed() {
+
+
   if (key == 'w') {
     upPressed = true;
   } else if (key == 's') {
@@ -172,7 +190,7 @@ void keyPressed() {
     leftPressed = true;
   } else if (key == 'd') {
     rightPressed = true;
-  }else if (keyCode==SHIFT) {
+  } else if (keyCode==SHIFT) {
     shiftPressed = true;
   }
 }
@@ -186,7 +204,7 @@ void keyReleased() {
     leftPressed = false;
   } else if (key == 'd') {
     rightPressed = false;
-  }else if (keyCode==SHIFT) {
+  } else if (keyCode==SHIFT) {
     shiftPressed = false;
   }
 }

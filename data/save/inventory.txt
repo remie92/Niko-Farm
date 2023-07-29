@@ -1,3 +1,4 @@
+Seeds,5
 Hoe,1
 Bucket,1
 Grass,9
