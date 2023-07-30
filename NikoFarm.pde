@@ -43,11 +43,12 @@ final int wellId=14;
 nikoController nikoController=new nikoController();
 void setup() {
   loadData();
-  //fullScreen();
+  fullScreen();
+  // surface.setResizable(true);
   size(500, 500);
   noSmooth();
   spriteScale=height/216.0;
-  surface.setResizable(true);
+
   //for (int i=2; i<10; i++) {        //adds random dirt
   //  for (int j=2; j<10; j++) {
   //    if (random(1)>0.2) {

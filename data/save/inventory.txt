@@ -1,4 +1,3 @@
+Seeds,5
 Hoe,1
 Bucket,1
-Egg,13
-Grass,6
