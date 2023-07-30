@@ -21,6 +21,10 @@ IntDict inventory;
 PImage titleBackground;
 PImage titleNiko;
 
+PImage[] animalImages;
+String[] animalNames;
+ArrayList<animal> animals=new ArrayList<animal>();
+
 int selectedItem=0;
 
 int gameState=0;
@@ -39,10 +43,11 @@ final int wellId=14;
 nikoController nikoController=new nikoController();
 void setup() {
   loadData();
-  fullScreen();
+  //fullScreen();
+  size(500, 500);
   noSmooth();
-  //  spriteScale=height/216.0;
-
+  spriteScale=height/216.0;
+  surface.setResizable(true);
   //for (int i=2; i<10; i++) {        //adds random dirt
   //  for (int j=2; j<10; j++) {
   //    if (random(1)>0.2) {
@@ -50,19 +55,21 @@ void setup() {
   //    }
   //  }
   //}
+  animals.add(new animal(48, 48, "chicken"));
+  animals.add(new animal(100, 100, "cow"));
 }
 
 void draw() {
+  spriteScale=height/216.0;
   if (gameState==0) {
     image(titleBackground, 0, 0, width, height);
     fill(0, 0, 0, 100);
     noStroke();
-    // rect(int(width*0.65),int(height*0.28),int(width*0.22),int(spriteScale*16));
-    //  rect(int(width*0.65),int(height*0.43),int(width*0.32),int(spriteScale*16));
     textSize(spriteScale*16);
     fill(#FAE332);
-    text("New Game", width*0.65, height*0.35);
-    text("Load Last Game", width*0.65, height*0.5);
+    textAlign(RIGHT);
+    text("New Game", width*0.95, height*0.35);
+    text("Load Last Game", width*0.95, height*0.5);
     // image(titleNiko,width*0.7,height*0.3,width*0.2,height*0.4);
   }
   if (gameState==1) {
@@ -70,15 +77,34 @@ void draw() {
       saveGame();
     }
     background(128, 128, 255);
-    drawMap();
-    nikoController.tick();
-    nikoController.draw();
-    worldTick();
-    drawInventory();
-    if (selectedItem<0) {
+
+    worldTick();    //change random things in the world
+    nikoController.tick();  //allow niko do actions like moving
+
+    for (int i = 0; i < animals.size(); i++) {  //do the tick function on all the animals/entities
+      animal part = animals.get(i);
+      part.tick();
+      animals.set(i, part);
+    }
+
+    for (int i = animals.size() - 1; i >= 0; i--) {  //remove any animal/enities that can be deleted
+      animal part = animals.get(i);
+      if (part.delete) {
+        animals.remove(i);
+      }
+    }
+
+    drawMap();  //draw the world
+    for (int i = 0; i < animals.size(); i++) {  //draw all the animals/entitys
+      animal part = animals.get(i);
+      part.draw();
+    }
+    nikoController.draw();    //draw niko
+    drawInventory();      //draw inventory
+    if (selectedItem<0) {    //check if inventory selection is valid
       selectedItem=0;
     }
-    if (selectedItem>=inventory.size()) {
+    if (selectedItem>=inventory.size()) { //check if inventory selection is valid
       selectedItem=inventory.size()-1;
     }
   }
@@ -132,7 +158,7 @@ void drawMap() {
         try {
           int type=world[i][j];
           PImage tile = tileImages[type];
-          image(tile, (-totalX)*spriteScale+i*spriteScale*24, (-totalY-24)*spriteScale+j*spriteScale*24, 24 * spriteScale, 48 * spriteScale);
+          image(tile, (-totalX)*spriteScale+i*spriteScale*24, (-totalY-24)*spriteScale+j*spriteScale*24, 24 * spriteScale, 48 * spriteScale+1);
         }
         catch(Exception e) {
         }

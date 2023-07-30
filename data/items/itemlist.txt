@@ -5,3 +5,5 @@ Hoe
 Flour
 Bucket
 Water Bucket
+Egg
+Milk Bucket

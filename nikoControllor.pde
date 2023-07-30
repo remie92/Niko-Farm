@@ -70,6 +70,13 @@ class nikoController {
       }
       catch(Exception e) {
       }
+      for (int i = 0; i < animals.size(); i++) {  //draw all the animals/entitys
+        animal part = animals.get(i);
+        if (dist((part.x+12)*spriteScale-(nikoX*spriteScale*24)-(nikoController.inbetweenX*spriteScale), (part.y+12)*spriteScale-(nikoY*spriteScale*24)-(nikoController.inbetweenY*spriteScale), mouseX, mouseY)<100) {
+          part.click();
+        }
+        animals.set(i, part);
+      }
     }
   }
 
@@ -78,21 +85,29 @@ class nikoController {
 
       int offsetX=int(width/2)/int(24*spriteScale)-1;
       int offsetY=int(height/2)/int(24*spriteScale);
-      if (upPressed&&isSolid(world[nikoX+offsetX][nikoY+offsetY-1])==false) {
-        moving=true;
-        direction=0;
+      if (nikoY+offsetY>0) {
+        if (upPressed&&isSolid(world[nikoX+offsetX][nikoY+offsetY-1])==false) {
+          moving=true;
+          direction=0;
+        }
       }
-      if (rightPressed&&isSolid(world[nikoX+offsetX+1][nikoY+offsetY])==false) {
-        moving=true;
-        direction=1;
+      if (nikoX+offsetX<world.length) {
+        if (rightPressed&&isSolid(world[nikoX+offsetX+1][nikoY+offsetY])==false) {
+          moving=true;
+          direction=1;
+        }
       }
-      if (downPressed&&isSolid(world[nikoX+offsetX][nikoY+offsetY+1])==false) {
-        moving=true;
-        direction=2;
+      if (nikoY+offsetY<world[0].length) {
+        if (downPressed&&isSolid(world[nikoX+offsetX][nikoY+offsetY+1])==false) {
+          moving=true;
+          direction=2;
+        }
       }
-      if (leftPressed&&isSolid(world[nikoX+offsetX-1][nikoY+offsetY])==false) {
-        moving=true;
-        direction=3;
+      if (nikoX+offsetX>0) {
+        if (leftPressed&&isSolid(world[nikoX+offsetX-1][nikoY+offsetY])==false) {
+          moving=true;
+          direction=3;
+        }
       }
     }
     if (moving) {
@@ -130,21 +145,29 @@ class nikoController {
         inbetweenY=0;
         int offsetX=int(width/2)/int(24*spriteScale)-1;
         int offsetY=int(height/2)/int(24*spriteScale);
-        if (upPressed&&isSolid(world[nikoX+offsetX][nikoY+offsetY-1])==false) {
-          moving=true;
-          direction=0;
+        if (nikoY+offsetY>0) {
+          if (upPressed&&isSolid(world[nikoX+offsetX][nikoY+offsetY-1])==false) {
+            moving=true;
+            direction=0;
+          }
         }
-        if (rightPressed&&isSolid(world[nikoX+offsetX+1][nikoY+offsetY])==false) {
-          moving=true;
-          direction=1;
+        if (nikoX+offsetX<world.length) {
+          if (rightPressed&&isSolid(world[nikoX+offsetX+1][nikoY+offsetY])==false) {
+            moving=true;
+            direction=1;
+          }
         }
-        if (downPressed&&isSolid(world[nikoX+offsetX][nikoY+offsetY+1])==false) {
-          moving=true;
-          direction=2;
+        if (nikoY+offsetY<world[0].length) {
+          if (downPressed&&isSolid(world[nikoX+offsetX][nikoY+offsetY+1])==false) {
+            moving=true;
+            direction=2;
+          }
         }
-        if (leftPressed&&isSolid(world[nikoX+offsetX-1][nikoY+offsetY])==false) {
-          moving=true;
-          direction=3;
+        if (nikoX+offsetX>0) {
+          if (leftPressed&&isSolid(world[nikoX+offsetX-1][nikoY+offsetY])==false) {
+            moving=true;
+            direction=3;
+          }
         }
       }
     }
@@ -222,5 +245,5 @@ void drawNiko(int x, int y) {
   x *= 24;
   y *= 32;
   PImage niko = nikoSheet.get(x, y, 24, 32);
-  image(niko, width/2-(24*spriteScale), height/2-(24*spriteScale), 24 * spriteScale, 32 * spriteScale);
+  image(niko, int((width/2)/(24*spriteScale)-1)*24*spriteScale, (int((height/2)/(24*spriteScale))-0.5)*24*spriteScale, 24 * spriteScale, 32 * spriteScale);
 }

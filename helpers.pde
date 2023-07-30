@@ -1,9 +1,9 @@
-boolean mouseIn(float x,float y,float sx,float sy){
-return mouseX>x&&mouseY>y&&mouseX<x+sx&&mouseY<y+sy;
+boolean mouseIn(float x, float y, float sx, float sy) {
+  return mouseX>x&&mouseY>y&&mouseX<x+sx&&mouseY<y+sy;
 }
 
 void loadData() {
-  
+
   titleNiko=loadImage("data/title/niko title.png");
   titleBackground=loadImage("data/title/titlebackground.png");
   itemNames=loadStrings("data/items/itemlist.txt");
@@ -11,6 +11,14 @@ void loadData() {
   for (int i=0; i<itemNames.length; i++) {
     itemImages[i]=loadImage("data/items/"+itemNames[i]+".png");    //load images in array based on names
   }
+
+
+  animalNames=loadStrings("data/entity/names.txt");
+  animalImages=new PImage[animalNames.length];
+  for (int i=0; i<animalNames.length; i++) {
+    animalImages[i]=loadImage("data/entity/"+animalNames[i]+".png");    //load images in array based on names
+  }
+  
   nikoSheet=loadImage("data/niko.png");
   tileSheet=loadImage("data/tile.png");
   for (int i=0; i<tileImages.length; i++) {
@@ -21,12 +29,12 @@ void loadData() {
 
 boolean isSolid(int type) {
   int[] solid={
-    7, 
-    8,
-    9,
-    10,
-    11,
-    12
+    9, 
+    10, 
+    11, 
+    12,
+    13,
+    14
   };
 
   for (int i=0; i<solid.length; i++) {
