@@ -1,4 +1,4 @@
-float randomAnimalChance=0.01;
+float randomAnimalChance=0.001;
 float randomMoveChance=0.01;
 float animalSpeed=0.2;
 
@@ -55,8 +55,8 @@ class animal {
     case 1:
 
       if (keys[selectedItem].equals("Bucket")) {
-        removeInventory(1,"Bucket");
-        addInventory(1,"Milk Bucket");
+        removeInventory(1, "Bucket");
+        addInventory(1, "Milk Bucket");
       }
     }
   }
@@ -70,7 +70,7 @@ class animal {
       }
     }
 
-    if (dist( (x+12)*spriteScale-(nikoX*spriteScale*24)-(nikoController.inbetweenX*spriteScale), (y+12)*spriteScale-(nikoY*spriteScale*24)-(nikoController.inbetweenY*spriteScale), width/2, height/2)<100) {  //do something if nikos touches it
+    if (dist( (x)*spriteScale-(nikoX*spriteScale*24)-(nikoController.inbetweenX*spriteScale), (y+12)*spriteScale-(nikoY*spriteScale*24)-(nikoController.inbetweenY*spriteScale), int((width/2)/(24*spriteScale)-1)*24*spriteScale+(12*spriteScale), (int((height/2)/(24*spriteScale))-0.5)*24*spriteScale+(16*spriteScale))<20*spriteScale) {  //do something if nikos touches it
       switch(touchId) {
       case 1:
         delete=true;
@@ -84,8 +84,22 @@ class animal {
       move=new PVector(random(-animalSpeed, animalSpeed), random(-animalSpeed, animalSpeed));
     }
     if (randomMove) {      //add move Vector to x and y
-      x+=move.x;
-      y+=move.y;
+    try{
+      if (isSolid(world[int(x/24)+1][int(y/24)])&&move.x>0) {
+        move.x=0;
+      }
+      if (isSolid(world[int(x/24)-1][int(y/24)])&&move.x<0) {
+        move.x=0;
+      }
+      if (isSolid(world[int(x/24)][int(y/24)+1])&&move.y>0) {
+        move.y=0;
+      }
+      if (isSolid(world[int(x/24)][int(y/24)-1])&&move.y<0) {
+        move.y=0;
+      }
+    } catch(ArrayIndexOutOfBoundsException e){}
+      x+=move.x*spriteScale/5;
+      y+=move.y*spriteScale/5;
       if (x<0) {
         move.x*=-1;
       }
@@ -114,5 +128,6 @@ class animal {
 
     image(animalImages[getIndex(name, animalNames)], -12*spriteScale, 0, 24*spriteScale, 24*spriteScale);
     popMatrix();
+    circle(int((width/2)/(24*spriteScale)-1)*24*spriteScale+(12*spriteScale*24), (int((height/2)/(24*spriteScale))-0.5)*24*spriteScale, 50);
   }
 }

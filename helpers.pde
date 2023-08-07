@@ -18,8 +18,11 @@ void loadData() {
   for (int i=0; i<animalNames.length; i++) {
     animalImages[i]=loadImage("data/entity/"+animalNames[i]+".png");    //load images in array based on names
   }
-  
-  nikoSheet=loadImage("data/niko.png");
+  if (!nikoRoomba) {
+    nikoSheet=loadImage("data/niko.png");
+  } else {
+    nikoSheet=loadImage("data/niko_roomba.png");
+  }
   tileSheet=loadImage("data/tile.png");
   for (int i=0; i<tileImages.length; i++) {
     tileImages[i]= tileSheet.get(i*24, 0, 24, 48);      //turn tileSheet into array of PImages
@@ -32,9 +35,10 @@ boolean isSolid(int type) {
     9, 
     10, 
     11, 
-    12,
-    13,
-    14
+    12, 
+    13, 
+    14,
+    15,16,17
   };
 
   for (int i=0; i<solid.length; i++) {
@@ -54,6 +58,20 @@ void addInventory(int amount, String name) {
   } else {
     inventory.set(name, amount);
   }
+}
+
+boolean hasInventory(int amount, String name) {
+  String[] keys=inventory.keyArray();
+
+  int index=getIndex(name, keys);
+  if (index==-1) {
+    return false;
+  }
+  if (amount<=inventory.get(name)) {
+    return true;
+  }
+
+  return false;
 }
 
 
@@ -96,6 +114,14 @@ void drawInventory() {
   }
 }
 
+boolean isInArray(int target, int[] array) {
+  for (int value : array) {
+    if (value == target) {
+      return true; // Integer is found in the array
+    }
+  }
+  return false; // Integer is not found in the array
+}
 
 
 int getIndex(String target, String[] array) {

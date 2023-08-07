@@ -17,6 +17,7 @@ void mouseReleased() {
     nikoController.click();
     saveGame();
   }
+  //  println(world[100-5][100-7]);
 }
 
 int[] screenToTile() {
@@ -40,7 +41,7 @@ class nikoController {
 
 
   void click() {
-    if (mouseButton==LEFT&&dist(width/2, height/2, mouseX, mouseY)<spriteScale*100) {
+    if (mouseButton==LEFT&&dist(int((width/2)/(24*spriteScale)-1)*24*spriteScale+(12*spriteScale), (int((height/2)/(24*spriteScale))-0.5)*24*spriteScale+(16*spriteScale), mouseX, mouseY)<spriteScale*100&&dist(int((width/2)/(24*spriteScale)-1)*24*spriteScale+(12*spriteScale), (int((height/2)/(24*spriteScale))-0.5)*24*spriteScale+(16*spriteScale), mouseX, mouseY)>spriteScale*24) {
       int totalX=nikoX*24+nikoController.inbetweenX;
       int totalY=nikoY*24+nikoController.inbetweenY;
       try {
@@ -65,6 +66,24 @@ class nikoController {
           break;
         case "Water Bucket":
           usingWaterBucket(inventory.keyArray()[selectedItem], tileX, tileY);
+          break;
+        case "Flour":
+          usingFlour(inventory.keyArray()[selectedItem], tileX, tileY);
+          break;
+        case "Pancake Batter":
+          usingPancakeBatter(inventory.keyArray()[selectedItem], tileX, tileY);
+          break;
+        case "Normal Builder":
+          usingBuilder(inventory.keyArray()[selectedItem], tileX, tileY);
+          break;
+        case "Interactive Builder":
+          usingBuilder(inventory.keyArray()[selectedItem], tileX, tileY);
+          break;
+        case "Pancake":
+          usingPancake(inventory.keyArray()[selectedItem], tileX, tileY);
+          break;
+        case "Hammer":
+          usingHammer(inventory.keyArray()[selectedItem], tileX, tileY);
           break;
         }
       }

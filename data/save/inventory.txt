@@ -1,3 +1,9 @@
-Seeds,5
 Hoe,1
-Bucket,1
+Hammer,1
+Grass,17
+Seeds,11
+Flour,11
+Bucket,5
+Interactive Builder,5
+Normal Builder,62
+Egg,5

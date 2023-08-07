@@ -51,8 +51,8 @@ void usingBucket(String name, int tileX, int tileY) {
     removeInventory(1, "Bucket");
     addInventory(1, "Water Bucket");
     break;
-    case waterId:
-        removeInventory(1, "Bucket");
+  case waterId:
+    removeInventory(1, "Bucket");
     addInventory(1, "Water Bucket");
     world[tileX][tileY]=grassId;
     break;
@@ -64,10 +64,10 @@ void usingWaterBucket(String name, int tileX, int tileY) {
     removeInventory(1, "Water Bucket");
     addInventory(1, "Bucket");
     break;
-    case grassId:
+  case grassId:
     removeInventory(1, "Water Bucket");
     addInventory(1, "Bucket");
-    
+
     world[tileX][tileY]=waterId;
     break;
   }
@@ -79,5 +79,70 @@ void usingWheat(String name, int tileX, int tileY) {
     removeInventory(1, "Wheat");
     addInventory(1, "Flour");
     break;
+  }
+}
+
+void usingFlour(String name, int tileX, int tileY) {
+  switch(world[tileX][tileY]) {
+  case mixerId:
+    if (hasInventory(1, "Milk Bucket")&&hasInventory(1, "Egg")) {
+      removeInventory(1, "Egg");
+      removeInventory(1, "Milk Bucket");
+      addInventory(1, "Bucket");
+      addInventory(1, "Pancake Batter");
+    }
+    break;
+  }
+}
+
+void usingPancakeBatter(String name, int tileX, int tileY) {
+  switch(world[tileX][tileY]) {
+  case ovenId:
+    removeInventory(1, "Pancake Batter");
+    addInventory(1, "Pancake");
+    break;
+  }
+}
+
+void usingPancake(String name, int tileX, int tileY) {
+  switch(world[tileX][tileY]) {
+  case shopId:
+    removeInventory(1, "Pancake");
+    addInventory(1, "Normal Builder");
+    addInventory(1, "Interactive Builder");
+    break;
+  }
+}
+
+void usingHammer(String name, int tileX, int tileY) {
+  if (isInArray(world[tileX][tileY], tileIndex)) {
+    if (isInArray(world[tileX][tileY], tileInteractive)) {
+      addInventory(1, "Interactive Builder");
+    }
+    if (!isInArray(world[tileX][tileY], tileInteractive)) {
+      addInventory(1, "Normal Builder");
+    }
+    world[tileX][tileY]=grassId;
+  }
+  //switch(world[tileX][tileY]) {
+  //case ovenId:
+  //  removeInventory(1, "Pancake Batter");
+  //  addInventory(1, "Pancake");
+  //  break;
+  //}
+}
+
+void usingBuilder(String name, int tileX, int tileY) {
+  if (name.equals("Interactive Builder")&&isInArray(tileIndex[selectedTile], tileInteractive)) {
+    if (world[tileX][tileY]==grassId) {
+      world[tileX][tileY]=tileIndex[selectedTile];
+      removeInventory(1, "Interactive Builder");
+    }
+  }
+  if (name.equals("Normal Builder")&&!isInArray(tileIndex[selectedTile], tileInteractive)) {
+    if (world[tileX][tileY]==grassId) {
+      world[tileX][tileY]=tileIndex[selectedTile];
+      removeInventory(1, "Normal Builder");
+    }
   }
 }

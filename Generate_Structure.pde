@@ -24,32 +24,40 @@ void smallHouse(int x, int y) {
 void windmill(int x, int y) {
   int[][] structure={
     {windId, -1, -1, -1, -1, windId, windId}, 
-    {windId,windId,-1,-1,windId,windId}, 
-    {-1,windId,windId,windId,windId},
-    {-1,-1,windId,windId,windId},
-    {-1,-1,windId,windId,windId,windId},
-    {-1,windId,windId,brickId,-1,windId,windId},
-    {windId,windId,brickId,brickId,brickId,-1,windId},
-    {-1,-1,brickId,brickId,brickId},
-    {-1,-1,brickId,brickId,brickId},
-    {-1,-1,brickId,brickId,brickId},
-    {-1,-1,brickId,woodId,brickId},
-    {-1,-1,brickId,crusherId,brickId}
+    {windId, windId, -1, -1, windId, windId}, 
+    {-1, windId, windId, windId, windId}, 
+    {-1, -1, windId, windId, windId}, 
+    {-1, -1, windId, windId, windId, windId}, 
+    {-1, windId, windId, brickId, -1, windId, windId}, 
+    {windId, windId, brickId, brickId, brickId, -1, windId}, 
+    {-1, -1, brickId, brickId, brickId}, 
+    {-1, -1, brickId, brickId, brickId}, 
+    {-1, -1, brickId, brickId, brickId}, 
+    {-1, -1, brickId, woodId, brickId}, 
+    {-1, -1, brickId, crusherId, brickId}
   };
 
   place(structure, x, y);
 }
 
 
-void well(int x,int y){
-int[][] structure={
-{woodId,woodId,woodId,woodId,woodId},
-{-1,woodId,-1,woodId,-1},
-{-1,woodId,wellId,woodId,-1},
-{-1,brickId,brickId,brickId,-1}
-};
+void well(int x, int y) {
+  int[][] structure={
+    {woodId, woodId, woodId, woodId, woodId}, 
+    {-1, woodId, -1, woodId, -1}, 
+    {-1, woodId, wellId, woodId, -1}, 
+    {-1, brickId, brickId, brickId, -1}
+  };
 
-place(structure,x,y);
+  place(structure, x, y);
+}
+
+
+void kitchen(int x, int y) {
+  int[][] structure={
+    {mixerId, -1, ovenId,-1,shopId}
+  };
+  place(structure, x, y);
 }
 
 

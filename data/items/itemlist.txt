@@ -7,3 +7,8 @@ Bucket
 Water Bucket
 Egg
 Milk Bucket
+Pancake Batter
+Pancake
+Normal Builder
+Interactive Builder
+Hammer

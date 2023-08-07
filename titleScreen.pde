@@ -4,15 +4,13 @@ void newGame() {
   inventory = new IntDict();
   addInventory(5, "Seeds");
   addInventory(1, "Hoe");
-  addInventory(1, "Bucket");
+  addInventory(1, "Hammer");
+  addInventory(5, "Bucket");
   smallHouse(3, 8);
   windmill(15, 8);
 
   well(25, 8);
-
-
-
-
+  kitchen(4, 4);
 }
 
 

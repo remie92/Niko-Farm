@@ -2,6 +2,7 @@
 //sprite y: 32
 PImage nikoSheet;
 float spriteScale=5;
+boolean nikoRoomba=true;
 
 boolean upPressed = false;
 boolean downPressed = false;
@@ -11,7 +12,7 @@ boolean shiftPressed=false;
 
 int[][] world=new int[100][100];
 PImage tileSheet;
-int tileAmount=15;
+int tileAmount=18;
 PImage[] tileImages=new PImage[tileAmount];
 
 PImage[] itemImages;
@@ -27,7 +28,12 @@ ArrayList<animal> animals=new ArrayList<animal>();
 
 int selectedItem=0;
 
+int selectedTile=0;
+
+
 int gameState=0;
+
+
 
 final int grassId=0;
 final int farmId=1;
@@ -38,14 +44,35 @@ final int windId=11;
 final int crusherId=12;
 final int waterId=13;
 final int wellId=14;
+final int ovenId=16;
+final int mixerId=15;
+final int shopId=17;
 
+
+
+int[] tileIndex={
+  brickId, 
+  woodId, 
+  windId, 
+  crusherId, 
+  wellId, 
+  ovenId, 
+  mixerId
+};
+
+int[] tileInteractive={
+  crusherId, 
+  wellId, 
+  ovenId, 
+  mixerId
+};
 
 nikoController nikoController=new nikoController();
 void setup() {
   loadData();
   fullScreen();
   // surface.setResizable(true);
-  size(500, 500);
+  //size(500, 500);
   noSmooth();
   spriteScale=height/216.0;
 
@@ -57,7 +84,7 @@ void setup() {
   //  }
   //}
   animals.add(new animal(48, 48, "chicken"));
-  animals.add(new animal(100, 100, "cow"));
+  animals.add(new animal(80, 80, "cow"));
 }
 
 void draw() {
@@ -74,6 +101,7 @@ void draw() {
     // image(titleNiko,width*0.7,height*0.3,width*0.2,height*0.4);
   }
   if (gameState==1) {
+    println(animals.get(0).x);
     if (frameCount%(60*10)==0) {
       saveGame();
     }
@@ -108,12 +136,38 @@ void draw() {
     if (selectedItem>=inventory.size()) { //check if inventory selection is valid
       selectedItem=inventory.size()-1;
     }
+
+    if (keyPressed==true&&key=='b') {
+      fill(100, 200);
+      stroke(0);
+      strokeWeight(spriteScale*2);
+      circle(width/2, height/2, 150*spriteScale);
+      for (int i=0; i<tileIndex.length; i++) {
+        PVector vec=PVector.fromAngle(radians(i*(360/tileIndex.length)-90));
+        vec.mult(spriteScale*50);
+        if (i==selectedTile) {
+          fill(0, 0);
+          stroke(0, 255, 0);
+          strokeWeight(spriteScale*2);
+          rect(width/2+vec.x-(9*spriteScale), height/2+vec.y-(9*spriteScale), 18*spriteScale, 18*spriteScale);
+        }
+        image(tileImages[tileIndex[i]], width/2+vec.x-(9*spriteScale), height/2+vec.y-(27*spriteScale), 18*spriteScale, 36*spriteScale);
+        float distance = dist(mouseX, mouseY, width / 2 + vec.x, height / 2 + vec.y);
+
+        // Check if the mouse is hovering over the current block
+        if (distance < 18 * spriteScale) {
+          selectedTile = i; // Update the selectedTile index
+        }
+      }
+    }
+  }
+  if (gameState==2) {
   }
 }
 
 
 
-int randomTick=100;    //blocks per ten thousand
+int randomTick=1000;    //blocks per ten thousand
 float randomChance=0.1;
 
 void worldTick() {
@@ -159,7 +213,7 @@ void drawMap() {
         try {
           int type=world[i][j];
           PImage tile = tileImages[type];
-          image(tile, (-totalX)*spriteScale+i*spriteScale*24, (-totalY-24)*spriteScale+j*spriteScale*24, 24 * spriteScale, 48 * spriteScale+1);
+          image(tile, (-totalX)*spriteScale+i*spriteScale*24, (-totalY-24)*spriteScale+j*spriteScale*24, 24 * spriteScale+2, 48 * spriteScale+2);
         }
         catch(Exception e) {
         }
