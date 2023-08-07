@@ -1,4 +1,4 @@
-# Niko Farm
+# Niko and the Wheat Machine
  A lil game about Niko from the game Oneshot!
 
 
@@ -29,3 +29,4 @@
 
 ## Credits:
 - Wheat Texures made by u/LegionCobra on Reddit.
+- Name by u/-Loife- on Reddit
